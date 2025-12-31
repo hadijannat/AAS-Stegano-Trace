@@ -1,0 +1,27 @@
+{
+  "assetAdministrationShells": [
+    {
+      "id": "urn:example:aas:minimal-001",
+      "idShort": "MinimalAsset"
+    }
+  ],
+  "submodels": [
+    {
+      "idShort": "BasicInfo",
+      "submodelElements": [
+        {
+          "idShort": "Name",
+          "modelType": "Property",
+          "valueType": "xs:string",
+          "value": "Test Component",
+          "description": [
+            {
+              "language": "en",
+              "text": "Component name"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aas-stegano-trace"
+version = "1.0.0"
+description = "Invisible Forensic Watermarking for Asset Administration Shells using Zero-Width Steganography"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.8"
+authors = [
+    {name = "Hadi Jannat", email = "your.email@rwth-aachen.de"}
+]
+maintainers = [
+    {name = "Hadi Jannat", email = "your.email@rwth-aachen.de"}
+]
+keywords = [
+    "AAS",
+    "Asset Administration Shell",
+    "Industry 4.0",
+    "Steganography",
+    "Watermarking",
+    "Forensics",
+    "Data Sovereignty",
+    "Digital Twin",
+    "Manufacturing",
+    "Catena-X"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Manufacturing",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed"
+]
+
+# No external dependencies - standard library only!
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "mypy>=1.0.0",
+    "ruff>=0.1.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/hadijannat/AAS-Stegano-Trace"
+Documentation = "https://github.com/hadijannat/AAS-Stegano-Trace#readme"
+Repository = "https://github.com/hadijannat/AAS-Stegano-Trace.git"
+Issues = "https://github.com/hadijannat/AAS-Stegano-Trace/issues"
+Changelog = "https://github.com/hadijannat/AAS-Stegano-Trace/blob/main/CHANGELOG.md"
+
+[project.scripts]
+aas-stegano-trace = "src.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*", "aas_stegano_trace*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+
+[tool.black]
+line-length = 100
+target-version = ["py38", "py39", "py310", "py311", "py312"]
+include = '\.pyi?$'
+
+[tool.ruff]
+line-length = 100
+target-version = "py38"
+select = ["E", "F", "W", "I", "N", "D", "UP", "B", "C4", "SIM"]
+ignore = ["D100", "D104", "D107"]
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true

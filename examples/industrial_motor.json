@@ -1,0 +1,191 @@
+{
+  "assetAdministrationShells": [
+    {
+      "id": "urn:iat:rwth-aachen:aas:industrial-motor-001",
+      "idShort": "IndustrialMotor_IM420",
+      "description": [
+        {
+          "language": "en",
+          "text": "Industrial three-phase motor for precision manufacturing applications"
+        },
+        {
+          "language": "de",
+          "text": "Industrieller Drehstrommotor für Präzisionsfertigungsanwendungen"
+        }
+      ],
+      "assetInformation": {
+        "assetKind": "Instance",
+        "globalAssetId": "urn:iat:rwth-aachen:asset:motor-serial-2024-00142"
+      }
+    }
+  ],
+  "submodels": [
+    {
+      "id": "urn:iat:rwth-aachen:submodel:nameplate-001",
+      "idShort": "Nameplate",
+      "semanticId": {
+        "type": "ExternalReference",
+        "keys": [
+          {
+            "type": "GlobalReference",
+            "value": "https://admin-shell.io/zvei/nameplate/2/0/Nameplate"
+          }
+        ]
+      },
+      "description": [
+        {
+          "language": "en",
+          "text": "Contains identification and manufacturer information"
+        }
+      ],
+      "submodelElements": [
+        {
+          "idShort": "ManufacturerName",
+          "modelType": "Property",
+          "valueType": "xs:string",
+          "value": "Siemens AG",
+          "description": [
+            {
+              "language": "en",
+              "text": "Legal name of the manufacturer"
+            }
+          ]
+        },
+        {
+          "idShort": "ManufacturerProductDesignation",
+          "modelType": "MultiLanguageProperty",
+          "value": [
+            {
+              "language": "en",
+              "text": "SIMOTICS GP 1LE1 High-Efficiency Motor"
+            },
+            {
+              "language": "de",
+              "text": "SIMOTICS GP 1LE1 Hocheffizienzmotor"
+            }
+          ]
+        },
+        {
+          "idShort": "SerialNumber",
+          "modelType": "Property",
+          "valueType": "xs:string",
+          "value": "SN-2024-IM420-00142",
+          "description": [
+            {
+              "language": "en",
+              "text": "Unique serial number assigned by manufacturer"
+            }
+          ]
+        },
+        {
+          "idShort": "YearOfConstruction",
+          "modelType": "Property",
+          "valueType": "xs:integer",
+          "value": 2024
+        }
+      ]
+    },
+    {
+      "id": "urn:iat:rwth-aachen:submodel:technical-data-001",
+      "idShort": "TechnicalData",
+      "description": [
+        {
+          "language": "en",
+          "text": "Technical specifications and performance parameters"
+        }
+      ],
+      "submodelElements": [
+        {
+          "idShort": "RatedPower",
+          "modelType": "Property",
+          "valueType": "xs:double",
+          "value": 7.5,
+          "description": [
+            {
+              "language": "en",
+              "text": "Rated output power in kilowatts (kW)"
+            }
+          ]
+        },
+        {
+          "idShort": "RatedVoltage",
+          "modelType": "Property",
+          "valueType": "xs:double",
+          "value": 400
+        },
+        {
+          "idShort": "RatedFrequency",
+          "modelType": "Property",
+          "valueType": "xs:double",
+          "value": 50
+        },
+        {
+          "idShort": "EfficiencyClass",
+          "modelType": "Property",
+          "valueType": "xs:string",
+          "value": "IE4 - Super Premium Efficiency",
+          "description": [
+            {
+              "language": "en",
+              "text": "Energy efficiency classification per IEC 60034-30-1"
+            }
+          ]
+        },
+        {
+          "idShort": "MaxRotationSpeed",
+          "modelType": "Property",
+          "valueType": "xs:string",
+          "value": "1500 rpm @ 50Hz",
+          "description": [
+            {
+              "language": "en",
+              "text": "Maximum rotation speed at nominal frequency"
+            }
+          ]
+        },
+        {
+          "idShort": "IPRating",
+          "modelType": "Property",
+          "valueType": "xs:string",
+          "value": "IP55"
+        }
+      ]
+    },
+    {
+      "id": "urn:iat:rwth-aachen:submodel:operational-data-001",
+      "idShort": "OperationalData",
+      "description": [
+        {
+          "language": "en",
+          "text": "Real-time operational parameters and diagnostics"
+        }
+      ],
+      "submodelElements": [
+        {
+          "idShort": "OperatingHours",
+          "modelType": "Property",
+          "valueType": "xs:integer",
+          "value": 8547
+        },
+        {
+          "idShort": "LastMaintenanceDate",
+          "modelType": "Property",
+          "valueType": "xs:string",
+          "value": "2024-06-15"
+        },
+        {
+          "idShort": "MaintenanceNotes",
+          "modelType": "Property",
+          "valueType": "xs:string",
+          "value": "Bearing replacement completed. Next inspection due at 12000 hours.",
+          "description": [
+            {
+              "language": "en",
+              "text": "Free-text notes from last maintenance activity"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
