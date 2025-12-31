@@ -31,7 +31,7 @@ from .aas_tracer import AASTracer, TraceReport
 
 __all__ = [
     "SteganoEngine",
-    "ZeroWidthCodec", 
+    "ZeroWidthCodec",
     "AASInjector",
     "InjectionReport",
     "AASTracer",
