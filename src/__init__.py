@@ -1,8 +1,8 @@
 """
 AAS-Stegano-Trace: Forensic Watermarking for Asset Administration Shells
 
-This package provides invisible forensic fingerprinting for AAS files using 
-Zero-Width Unicode Steganography. It enables data owners to embed imperceptible 
+This package provides invisible forensic fingerprinting for AAS files using
+Zero-Width Unicode Steganography. It enables data owners to embed imperceptible
 recipient identifiers that survive standard file handling but enable leak tracing.
 
 Core Components:

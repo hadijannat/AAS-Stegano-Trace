@@ -15,7 +15,7 @@ Technical Background:
 
 Encoding Scheme:
     ZERO_WIDTH_SPACE (U+200B)      → Binary '0'
-    ZERO_WIDTH_NON_JOINER (U+200C) → Binary '1'  
+    ZERO_WIDTH_NON_JOINER (U+200C) → Binary '1'
     ZERO_WIDTH_JOINER (U+200D)     → Delimiter (marks payload boundaries)
 
 Security Note:

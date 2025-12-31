@@ -6,16 +6,16 @@ This module provides a professional CLI for forensic watermarking operations
 on Asset Administration Shell files. It supports three primary workflows:
 
     1. INJECT: Mark an AAS file with a recipient identifier before sharing
-    2. TRACE:  Analyze a file to extract any embedded watermarks  
+    2. TRACE:  Analyze a file to extract any embedded watermarks
     3. VERIFY: Quick check if a file contains watermarks
 
 Usage Examples:
     # Mark a file for a specific recipient
     $ python -m aas_stegano_trace inject motor.json "Supplier-ABC"
-    
+
     # Investigate a potentially leaked file
     $ python -m aas_stegano_trace trace leaked_file.json
-    
+
     # Quick watermark presence check
     $ python -m aas_stegano_trace verify suspicious_file.json
 

@@ -9,10 +9,10 @@ standard AAS processing pipelines.
 Target Fields for Injection:
     1. Description fields: The 'description' array contains multilingual
        LangString entries with 'text' fields - ideal for watermarking.
-    
+
     2. String Property values: SubmodelElements of type "Property" with
        valueType "xs:string" contain text values suitable for watermarking.
-    
+
     3. MultiLanguageProperty: Similar to descriptions, these contain
        LangString arrays with text content.
 
