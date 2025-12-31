@@ -30,12 +30,15 @@ import json
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Set, Union
+from typing import TYPE_CHECKING, Any, Dict, List, Optional, Set, Union
 
-try:
+if TYPE_CHECKING:
     from .stegano_core import SteganoEngine, ZeroWidthCodec
-except ImportError:
-    from stegano_core import SteganoEngine, ZeroWidthCodec
+else:
+    try:
+        from .stegano_core import SteganoEngine, ZeroWidthCodec
+    except ImportError:
+        from stegano_core import SteganoEngine, ZeroWidthCodec
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -66,7 +69,7 @@ class WatermarkFinding:
     visible_context: str
     confidence: float = 1.0
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return hash((self.payload, self.location_path))
 
 
@@ -204,7 +207,7 @@ class AASTracer:
         ...     f.write(report.to_json())
     """
 
-    def __init__(self, engine: SteganoEngine = None):
+    def __init__(self, engine: Optional[SteganoEngine] = None):
         """
         Initialize the forensic tracer.
 

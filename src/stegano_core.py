@@ -144,7 +144,7 @@ class SteganoEngine:
         This class is stateless and thread-safe. All methods are pure functions.
     """
 
-    def __init__(self, codec: ZeroWidthCodec = None):
+    def __init__(self, codec: Optional[ZeroWidthCodec] = None):
         """
         Initialize the steganography engine.
 

@@ -28,17 +28,23 @@ import json
 import os
 import sys
 from pathlib import Path
+from typing import TYPE_CHECKING, Callable, cast
 
 # Local imports (when run as module)
-try:
+if TYPE_CHECKING:
     from .aas_injector import AASInjector
     from .aas_tracer import AASTracer
     from .stegano_core import SteganoEngine
-except ImportError:
-    # Direct script execution
-    from aas_injector import AASInjector
-    from aas_tracer import AASTracer
-    from stegano_core import SteganoEngine
+else:
+    try:
+        from .aas_injector import AASInjector
+        from .aas_tracer import AASTracer
+        from .stegano_core import SteganoEngine
+    except ImportError:
+        # Direct script execution
+        from aas_injector import AASInjector
+        from aas_tracer import AASTracer
+        from stegano_core import SteganoEngine
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -61,7 +67,7 @@ class ConsoleOutput:
     CYAN = "\033[96m" if COLORS_ENABLED else ""
 
     @classmethod
-    def banner(cls):
+    def banner(cls) -> None:
         """Print the application banner."""
         print(
             f"""
@@ -74,27 +80,27 @@ class ConsoleOutput:
         )
 
     @classmethod
-    def success(cls, message: str):
+    def success(cls, message: str) -> None:
         """Print a success message."""
         print(f"{cls.GREEN}✓ {message}{cls.RESET}")
 
     @classmethod
-    def error(cls, message: str):
+    def error(cls, message: str) -> None:
         """Print an error message."""
         print(f"{cls.RED}✗ {message}{cls.RESET}")
 
     @classmethod
-    def warning(cls, message: str):
+    def warning(cls, message: str) -> None:
         """Print a warning message."""
         print(f"{cls.YELLOW}⚠ {message}{cls.RESET}")
 
     @classmethod
-    def info(cls, message: str):
+    def info(cls, message: str) -> None:
         """Print an info message."""
         print(f"{cls.BLUE}ℹ {message}{cls.RESET}")
 
     @classmethod
-    def alert(cls, message: str):
+    def alert(cls, message: str) -> None:
         """Print an alert/detection message."""
         print(f"{cls.RED}{cls.BOLD}🚨 {message}{cls.RESET}")
 
@@ -104,7 +110,7 @@ class ConsoleOutput:
 # ═══════════════════════════════════════════════════════════════════════════════
 
 
-def cmd_inject(args) -> int:
+def cmd_inject(args: argparse.Namespace) -> int:
     """
     Handle the 'inject' command - embed watermark into AAS file.
 
@@ -183,7 +189,7 @@ def cmd_inject(args) -> int:
     return 0
 
 
-def cmd_trace(args) -> int:
+def cmd_trace(args: argparse.Namespace) -> int:
     """
     Handle the 'trace' command - forensic analysis of suspected leak.
 
@@ -228,7 +234,7 @@ def cmd_trace(args) -> int:
         return 0
 
 
-def cmd_verify(args) -> int:
+def cmd_verify(args: argparse.Namespace) -> int:
     """
     Handle the 'verify' command - quick watermark presence check.
 
@@ -257,7 +263,7 @@ def cmd_verify(args) -> int:
             return 0
 
 
-def cmd_demo(args) -> int:
+def cmd_demo(args: argparse.Namespace) -> int:
     """
     Handle the 'demo' command - run a demonstration of the full workflow.
 
@@ -337,8 +343,8 @@ def cmd_demo(args) -> int:
 # ═══════════════════════════════════════════════════════════════════════════════
 
 
-def main():
-    """Main CLI entry point."""
+def main() -> int:
+    """Run the CLI entry point."""
     parser = argparse.ArgumentParser(
         prog="aas-stegano-trace",
         description="Invisible Forensic Watermarking for Asset Administration Shells",
@@ -429,7 +435,8 @@ For more information: https://github.com/hadijannat/AAS-Stegano-Trace
         return 0
 
     try:
-        return args.func(args)
+        func = cast(Callable[[argparse.Namespace], int], args.func)
+        return func(args)
     except KeyboardInterrupt:
         print("\nOperation cancelled.")
         return 130

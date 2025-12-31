@@ -29,12 +29,15 @@ AAS Specification Reference:
 import copy
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import TYPE_CHECKING, Any, Dict, List, Optional
 
-try:
+if TYPE_CHECKING:
     from .stegano_core import SteganoEngine, ZeroWidthCodec
-except ImportError:
-    from stegano_core import SteganoEngine, ZeroWidthCodec
+else:
+    try:
+        from .stegano_core import SteganoEngine, ZeroWidthCodec
+    except ImportError:
+        from stegano_core import SteganoEngine, ZeroWidthCodec
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -170,7 +173,7 @@ class AASInjector:
         operation, pass a deep copy of the AAS data.
     """
 
-    def __init__(self, engine: SteganoEngine = None):
+    def __init__(self, engine: Optional[SteganoEngine] = None):
         """
         Initialize the AAS injector.
 
