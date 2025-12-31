@@ -26,10 +26,10 @@ AAS Specification Reference:
     - IDTA-01002: Asset Administration Shell Part 2 - API
 """
 
-from dataclasses import dataclass, field
-from typing import Any, Dict, List, Set, Optional
-from enum import Enum
 import copy
+from dataclasses import dataclass, field
+from enum import Enum
+from typing import Any, Dict, List, Optional
 
 try:
     from .stegano_core import SteganoEngine, ZeroWidthCodec
@@ -104,9 +104,9 @@ class InjectionReport:
     def summary(self) -> str:
         """Human-readable summary of the injection operation."""
         lines = [
-            f"═══════════════════════════════════════════════════════════",
+            "═══════════════════════════════════════════════════════════",
             f"  Injection Report: '{self.recipient_id}'",
-            f"═══════════════════════════════════════════════════════════",
+            "═══════════════════════════════════════════════════════════",
             f"  ✓ Successfully watermarked: {self.total_injections} field(s)",
             f"  ○ Skipped (already marked):  {self.skipped_count} field(s)",
         ]
@@ -117,12 +117,12 @@ class InjectionReport:
                 lines.append(f"    - {w}")
 
         if self.injection_points:
-            lines.append(f"\n  Injection Locations:")
+            lines.append("\n  Injection Locations:")
             for ip in self.injection_points[:10]:  # Show max 10 locations
                 short_path = ip.path[-50:] if len(ip.path) > 50 else ip.path
                 lines.append(f"    • {ip.target_type.value}: ...{short_path}")
 
-        lines.append(f"═══════════════════════════════════════════════════════════")
+        lines.append("═══════════════════════════════════════════════════════════")
         return "\n".join(lines)
 
 

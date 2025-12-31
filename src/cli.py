@@ -25,21 +25,20 @@ with appropriate exit codes and machine-readable output options.
 
 import argparse
 import json
-import sys
 import os
+import sys
 from pathlib import Path
-from typing import Optional
 
 # Local imports (when run as module)
 try:
-    from .stegano_core import SteganoEngine
     from .aas_injector import AASInjector
     from .aas_tracer import AASTracer
+    from .stegano_core import SteganoEngine
 except ImportError:
     # Direct script execution
-    from stegano_core import SteganoEngine
     from aas_injector import AASInjector
     from aas_tracer import AASTracer
+    from stegano_core import SteganoEngine
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -122,13 +121,13 @@ def cmd_inject(args) -> int:
         ConsoleOutput.error(f"File not found: {input_path}")
         return 1
 
-    if not input_path.suffix.lower() == ".json":
+    if input_path.suffix.lower() != ".json":
         ConsoleOutput.warning("File does not have .json extension - proceeding anyway")
 
     # Load the AAS file
     ConsoleOutput.info(f"Loading: {input_path}")
     try:
-        with open(input_path, "r", encoding="utf-8") as f:
+        with open(input_path, encoding="utf-8") as f:
             aas_data = json.load(f)
     except json.JSONDecodeError as e:
         ConsoleOutput.error(f"Invalid JSON: {e}")
@@ -221,9 +220,8 @@ def cmd_trace(args) -> int:
     # Summary with appropriate styling
     if report.watermarks_found:
         ConsoleOutput.alert("WATERMARK DETECTED!")
-        print(
-            f"   This file was issued to: {ConsoleOutput.BOLD}{list(report.payloads)}{ConsoleOutput.RESET}"
-        )
+        issued_to = list(report.payloads)
+        print(f"   This file was issued to: {ConsoleOutput.BOLD}{issued_to}{ConsoleOutput.RESET}")
         return 2  # Special exit code indicating watermark found
     else:
         ConsoleOutput.success("No forensic watermarks detected in this file.")

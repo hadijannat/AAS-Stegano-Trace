@@ -25,10 +25,9 @@ Security Note:
     characters, not that they can't decode them if found.
 """
 
+import hashlib
 from dataclasses import dataclass
 from typing import Optional
-import hashlib
-
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # UNICODE CODE POINTS FOR ZERO-WIDTH STEGANOGRAPHY

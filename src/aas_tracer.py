@@ -25,17 +25,17 @@ Example Investigation:
     ...     print(f"LEAK IDENTIFIED: File was issued to {report.payloads}")
 """
 
-from dataclasses import dataclass, field
-from typing import Any, Dict, List, Set, Optional, Union
-from pathlib import Path
-from datetime import datetime
-import json
 import hashlib
+import json
+from dataclasses import dataclass, field
+from datetime import datetime
+from pathlib import Path
+from typing import Any, Dict, List, Set, Union
 
 try:
-    from .stegano_core import SteganoEngine, ZeroWidthCodec, DecodeResult
+    from .stegano_core import SteganoEngine, ZeroWidthCodec
 except ImportError:
-    from stegano_core import SteganoEngine, ZeroWidthCodec, DecodeResult
+    from stegano_core import SteganoEngine, ZeroWidthCodec
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -119,7 +119,7 @@ class TraceReport:
         if self.watermarks_found:
             lines.append("║  ⚠️  WATERMARKS DETECTED                                         ║")
             lines.append("╠══════════════════════════════════════════════════════════════════╣")
-            lines.append(f"║  Identified Recipients:                                          ║")
+            lines.append("║  Identified Recipients:                                          ║")
             for payload in self.payloads:
                 lines.append(f"║    → {payload:<56} ║")
             lines.append(f"║  Total Watermark Instances: {self.total_watermarks:<36} ║")
@@ -233,7 +233,7 @@ class AASTracer:
         # Load data if path provided
         if isinstance(source, (str, Path)):
             try:
-                with open(source, "r", encoding="utf-8") as f:
+                with open(source, encoding="utf-8") as f:
                     content = f.read()
                     # Quick string check before parsing JSON
                     if ZeroWidthCodec.MARKER not in content:
@@ -273,7 +273,7 @@ class AASTracer:
         # Load data based on source type
         if isinstance(source, (str, Path)):
             try:
-                with open(source, "r", encoding="utf-8") as f:
+                with open(source, encoding="utf-8") as f:
                     raw_content = f.read()
                 file_hash = hashlib.sha256(raw_content.encode("utf-8")).hexdigest()
                 aas_data = json.loads(raw_content)

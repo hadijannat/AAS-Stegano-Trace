@@ -21,13 +21,13 @@ Author: Hadi Jannat (RWTH Aachen University - IAT)
 License: MIT
 """
 
+from .aas_injector import AASInjector, InjectionReport
+from .aas_tracer import AASTracer, TraceReport
+from .stegano_core import SteganoEngine, ZeroWidthCodec
+
 __version__ = "1.0.0"
 __author__ = "Hadi Jannat"
 __email__ = "your.email@rwth-aachen.de"
-
-from .stegano_core import SteganoEngine, ZeroWidthCodec
-from .aas_injector import AASInjector, InjectionReport
-from .aas_tracer import AASTracer, TraceReport
 
 __all__ = [
     "SteganoEngine",

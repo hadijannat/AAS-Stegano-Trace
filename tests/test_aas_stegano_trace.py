@@ -8,21 +8,20 @@ AAS injection/extraction, and end-to-end workflow tests.
 Run with: python -m pytest tests/ -v
 """
 
-import pytest
 import json
-import tempfile
 import os
+import sys
+import tempfile
 from pathlib import Path
 
-# Import the modules under test
-import sys
+import pytest
 
+# Import the modules under test
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-from stegano_core import SteganoEngine, ZeroWidthCodec, EncodeResult, DecodeResult
-from aas_injector import AASInjector, InjectionReport
-from aas_tracer import AASTracer, TraceReport
-
+from aas_injector import AASInjector
+from aas_tracer import AASTracer
+from stegano_core import EncodeResult, SteganoEngine, ZeroWidthCodec
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # FIXTURES
@@ -249,7 +248,7 @@ class TestAASInjector:
 
     def test_inject_into_string_properties(self, injector, sample_aas):
         """Test injection into Property values with xs:string type."""
-        report = injector.inject(sample_aas, "PropTest")
+        injector.inject(sample_aas, "PropTest")
 
         # Find the ManufacturerName property and check it was marked
         elements = sample_aas["submodels"][0]["submodelElements"]
@@ -270,7 +269,7 @@ class TestAASInjector:
 
     def test_idempotent_injection(self, injector, sample_aas):
         """Verify re-injection doesn't create duplicate watermarks."""
-        report1 = injector.inject(sample_aas, "First")
+        injector.inject(sample_aas, "First")
         report2 = injector.inject(sample_aas, "Second")
 
         # Second injection should skip already-marked fields
@@ -328,7 +327,7 @@ class TestAASTracer:
     def test_trace_from_file_path(self, tracer, injector, temp_json_file):
         """Test tracing from a file path."""
         # Load, inject, and save
-        with open(temp_json_file, "r") as f:
+        with open(temp_json_file) as f:
             aas_data = json.load(f)
 
         injector.inject(aas_data, "FilePathTest")
